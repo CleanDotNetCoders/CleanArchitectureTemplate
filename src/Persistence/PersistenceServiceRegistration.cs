@@ -1,7 +1,11 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Application.Repositories.EntityFramework;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MongoDB.Driver;
 using Persistence.Configurations;
+using Persistence.Repositories.EntityFramework;
+using Persistence.Repositories.EntityFramework.Contexts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +24,12 @@ namespace Persistence
                 var client = new MongoClient(settings.ConnectionString);
                 return client.GetDatabase(settings.CollectionName);
             });
+
+            services.AddDbContext<BaseDbContext>(options =>
+                                                     options.UseSqlServer(
+                                                         configuration.GetConnectionString("templatesql")));
+
+            services.AddScoped<IUserRepository,UserRepository>();
 
             return services;
         }
