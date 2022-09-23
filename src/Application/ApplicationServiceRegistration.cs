@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
-using Application.Common.Behaviours;
 using Application.Common.Behaviours.Authorization;
+using Application.Common.Behaviours.Validation;
+using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -12,7 +13,9 @@ public static class ApplicationServiceRegistration
     {
         services.AddMediatR(Assembly.GetExecutingAssembly());
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
+        services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(AuthorizationBehavior<,>));
+        services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
         return services;
     }
 }
