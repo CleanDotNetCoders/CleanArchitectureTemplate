@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using Application.Common.Behaviours;
+using Application.Common.Behaviours.Authorization;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 

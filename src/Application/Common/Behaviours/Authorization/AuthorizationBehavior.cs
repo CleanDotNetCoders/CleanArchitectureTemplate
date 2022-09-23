@@ -1,10 +1,9 @@
 ﻿using Application.Common.Exceptions;
-using Application.Common.Security;
 using Application.Services;
-using Microsoft.AspNetCore.Http;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 
-namespace Application.Common.Behaviours;
+namespace Application.Common.Behaviours.Authorization;
 
 public class AuthorizationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
     where TRequest : IRequest<TResponse>, ISecuredRequest

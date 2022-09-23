@@ -18,6 +18,9 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Folder Include="Common\Behaviours\Caching" />
+      <Folder Include="Common\Behaviours\Logging" />
+      <Folder Include="Common\Behaviours\Validation" />
       <Folder Include="Features\Auth\Queries\" />
     </ItemGroup>
 

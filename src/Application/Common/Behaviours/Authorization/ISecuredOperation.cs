@@ -1,4 +1,4 @@
-﻿namespace Application.Common.Security;
+﻿namespace Application.Common.Behaviours.Authorization;
 
 public interface ISecuredRequest
 {
