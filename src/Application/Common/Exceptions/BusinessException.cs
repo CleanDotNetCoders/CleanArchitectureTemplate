@@ -1,5 +1,4 @@
-﻿
-namespace Application.Common.Exceptions;
+﻿namespace Application.Common.Exceptions;
 
 public class BusinessException:Exception
 {

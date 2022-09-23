@@ -12,8 +12,8 @@ using Persistence.Repositories.EntityFramework.Contexts;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(BaseDbContext))]
-    [Migration("20220921171648_mg1")]
-    partial class mg1
+    [Migration("20220923191350_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

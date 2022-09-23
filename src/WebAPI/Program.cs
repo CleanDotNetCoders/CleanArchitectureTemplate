@@ -1,4 +1,5 @@
 using Application;
+using Application.Common.Extensions;
 using Infrastructure;
 using Persistence;
 using WebAPI.Extensions;
@@ -24,6 +25,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+if (app.Environment.IsProduction())
+    app.ConfigureCustomExceptionMiddleware();
 
 app.UseHttpsRedirection();
 

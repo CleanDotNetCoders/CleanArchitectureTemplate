@@ -2,15 +2,9 @@
 using Application.Features.Auth.Dtos;
 using Application.Repositories.EntityFramework;
 using Application.Services;
-using AutoMapper;
 using Domain.Entities;
 using Domain.Enums;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Features.Auth.Commands.CreateUserCommand;
 
@@ -23,13 +17,11 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, Creat
     {
         _userRepository = userRepository;
         _tokenHelper = tokenHelper;
-        _rules = rules;
     }
 
     public async Task<CreatedUserDto> Handle(CreateUserCommand request, CancellationToken cancellationToken)
     {
         var findedData =await _userRepository.GetAsync(p=>p.Email == request.Email);
-        await _rules.CheckIfEmailExist(findedData);
 
         HashingHelper.CreatePasswordHash(request.Password, out var passwordHash, out var passwordSalt);
         User user = new()
