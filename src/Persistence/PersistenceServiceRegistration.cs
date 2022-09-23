@@ -6,32 +6,27 @@ using MongoDB.Driver;
 using Persistence.Configurations;
 using Persistence.Repositories.EntityFramework;
 using Persistence.Repositories.EntityFramework.Contexts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Persistence
+namespace Persistence;
+
+public static class PersistenceServiceRegistration
 {
-    public static class PersistenceServiceRegistration
+    public static IServiceCollection AddPersistenceServices(this IServiceCollection services,
+        IConfiguration configuration)
     {
-        public static IServiceCollection AddPersistenceServices(this IServiceCollection services,
-                                                                IConfiguration configuration)
+        services.AddSingleton<IMongoDatabase>(options =>
         {
-            services.AddSingleton<IMongoDatabase>(options => {
-                var settings = configuration.GetSection("MongoDBSettings").Get<MongoSettings>();
-                var client = new MongoClient(settings.ConnectionString);
-                return client.GetDatabase(settings.CollectionName);
-            });
+            var settings = configuration.GetSection("MongoDBSettings").Get<MongoSettings>();
+            var client = new MongoClient(settings.ConnectionString);
+            return client.GetDatabase(settings.CollectionName);
+        });
 
-            services.AddDbContext<BaseDbContext>(options =>
-                                                     options.UseSqlServer(
-                                                         configuration.GetConnectionString("templatesql")));
+        services.AddDbContext<BaseDbContext>(options =>
+            options.UseSqlServer(
+                configuration.GetConnectionString("templatesql")));
 
-            services.AddScoped<IUserRepository,UserRepository>();
+        services.AddScoped<IUserRepository, UserRepository>();
 
-            return services;
-        }
+        return services;
     }
 }

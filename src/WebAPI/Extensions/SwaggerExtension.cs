@@ -1,35 +1,36 @@
 ﻿using Microsoft.OpenApi.Models;
 
-namespace WebAPI.Extensions
+namespace WebAPI.Extensions;
+
+public static class SwaggerExtension
 {
-    public static class SwaggerExtension
+    public static IServiceCollection AddSwagger(this IServiceCollection services)
     {
-        public static IServiceCollection AddSwagger(this IServiceCollection services)
+        services.AddSwaggerGen(x =>
         {
-            services.AddSwaggerGen(x =>
+            x.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
             {
-                x.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-                {
-                    Description = "JWT Authorization header using the bearer scheme",
-                    Name = "Authorization",
-                    In = ParameterLocation.Header,
-                    Type = SecuritySchemeType.ApiKey
-                });
-                x.AddSecurityRequirement(new OpenApiSecurityRequirement
-    {
-        {new OpenApiSecurityScheme
-        {
-            Reference = new OpenApiReference
-            {
-                Id = "Bearer",
-                Type = ReferenceType.SecurityScheme,
-            }
-        }, new List<string>()}
-    });
+                Description = "JWT Authorization header using the bearer scheme",
+                Name = "Authorization",
+                In = ParameterLocation.Header,
+                Type = SecuritySchemeType.ApiKey
             });
+            x.AddSecurityRequirement(new OpenApiSecurityRequirement
+            {
+                {
+                    new OpenApiSecurityScheme
+                    {
+                        Reference = new OpenApiReference
+                        {
+                            Id = "Bearer",
+                            Type = ReferenceType.SecurityScheme,
+                        }
+                    },
+                    new List<string>()
+                }
+            });
+        });
 
-            return services;
-
-        }
+        return services;
     }
 }
