@@ -1,24 +1,25 @@
-﻿using Application.Features.Auth.Commands.CreateUserCommand;
+﻿using Application.Common.Paging;
+using Application.Features.Auth.Commands.CreateUserCommand;
 using Application.Features.Auth.Commands.LoginUserCommand;
 using Application.Features.Auth.Dtos;
 using Application.Features.Auth.Models;
 using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Domain.Entities;
 
-namespace Application.Features.Auth.Profiles
+namespace Application.Features.Auth.Profiles;
+
+public class MappingProfile : Profile
 {
-    public class MappingProfile : Profile
+    public MappingProfile()
     {
-        public MappingProfile()
-        {
-            CreateMap<CreateUserCommand,CreatedUserDto>().ReverseMap();
-            CreateMap<LoginUserCommand,LoginedUserDto>().ReverseMap();
+        CreateMap<CreateUserCommand, CreatedUserDto>().ReverseMap();
+        CreateMap<LoginUserCommand, LoginedUserDto>().ReverseMap();
 
-            CreateMap<AccessToken, LoginedUserDto>().ReverseMap();
-        }
+        CreateMap<AccessToken, LoginedUserDto>().ReverseMap();
+
+        CreateMap<User, UserListDto>()
+            .ForMember(c => c.UserOperationClaims, opt => opt.MapFrom(c => c.UserOperationClaims)).ReverseMap();
+        CreateMap<IPaginate<User>, UserListModel>().ReverseMap();
+
     }
 }

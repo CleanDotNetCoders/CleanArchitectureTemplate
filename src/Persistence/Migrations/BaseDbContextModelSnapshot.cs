@@ -132,13 +132,10 @@ namespace Persistence.Migrations
                         .HasColumnType("nvarchar(450)")
                         .HasColumnName("Id");
 
-                    b.Property<int>("OperationClaimId")
-                        .HasColumnType("int")
-                        .HasColumnName("OperationClaimId");
-
-                    b.Property<string>("OperationClaimId1")
+                    b.Property<string>("OperationClaimId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(450)")
+                        .HasColumnName("OperationClaimId");
 
                     b.Property<string>("UserId")
                         .IsRequired()
@@ -147,7 +144,7 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("OperationClaimId1");
+                    b.HasIndex("OperationClaimId");
 
                     b.HasIndex("UserId");
 
@@ -169,7 +166,7 @@ namespace Persistence.Migrations
                 {
                     b.HasOne("Domain.Entities.OperationClaim", "OperationClaim")
                         .WithMany()
-                        .HasForeignKey("OperationClaimId1")
+                        .HasForeignKey("OperationClaimId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
