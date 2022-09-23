@@ -5,7 +5,7 @@ namespace Domain.Entities;
 public class UserOperationClaim : Entity
 {
     public string UserId { get; set; }
-    public int OperationClaimId { get; set; }
+    public string OperationClaimId { get; set; }
 
     public virtual User User { get; set; }
     public virtual OperationClaim OperationClaim { get; set; }
@@ -14,7 +14,7 @@ public class UserOperationClaim : Entity
     {
     }
 
-    public UserOperationClaim(string id, string userId, int operationClaimId) : base(id)
+    public UserOperationClaim(string id, string userId, string operationClaimId) : base(id)
     {
         UserId = userId;
         OperationClaimId = operationClaimId;

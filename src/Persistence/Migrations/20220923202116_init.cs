@@ -71,15 +71,14 @@ namespace Persistence.Migrations
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    OperationClaimId = table.Column<int>(type: "int", nullable: false),
-                    OperationClaimId1 = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    OperationClaimId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_UserOperationClaims", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_UserOperationClaims_OperationClaims_OperationClaimId1",
-                        column: x => x.OperationClaimId1,
+                        name: "FK_UserOperationClaims_OperationClaims_OperationClaimId",
+                        column: x => x.OperationClaimId,
                         principalTable: "OperationClaims",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -97,9 +96,9 @@ namespace Persistence.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserOperationClaims_OperationClaimId1",
+                name: "IX_UserOperationClaims_OperationClaimId",
                 table: "UserOperationClaims",
-                column: "OperationClaimId1");
+                column: "OperationClaimId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserOperationClaims_UserId",
