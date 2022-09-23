@@ -1,6 +1,7 @@
 ﻿using Application.Common.Exceptions;
 using Application.Common.Extensions;
 using Application.Services;
+using Infrastructure.Extensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.IdentityModel.Tokens;
 
