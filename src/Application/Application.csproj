@@ -9,9 +9,12 @@
     <ItemGroup>
       <PackageReference Include="AutoMapper" Version="11.0.1" />
       <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+      <PackageReference Include="FluentValidation" Version="11.2.2" />
+      <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.2.2" />
       <PackageReference Include="MediatR" Version="10.0.1" />
       <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
       <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+      <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
       <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.9" />
       <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0-rc.1.22426.10" />
       <PackageReference Include="System.Linq.Dynamic.Core" Version="1.2.20" />
@@ -20,7 +23,6 @@
     <ItemGroup>
       <Folder Include="Common\Behaviours\Caching" />
       <Folder Include="Common\Behaviours\Logging" />
-      <Folder Include="Common\Behaviours\Validation" />
       <Folder Include="Features\Auth\Queries\" />
     </ItemGroup>
 
