@@ -1,5 +1,4 @@
-﻿using Application.Features.Auth.Dtos;
-using Application.Features.Auth.Models;
+﻿using Application.Features.Auth.Models;
 using Application.Repositories.EntityFramework;
 using AutoMapper;
 using MediatR;
@@ -26,13 +25,8 @@ public class GetUserListQuery : IRequest<UserListModel>
 
         public async Task<UserListModel> Handle(GetUserListQuery request, CancellationToken cancellationToken)
         {
-            // IPaginate<Technology> technologies = await _technologyRepository.GetListAsync(
-            //     include: m => m.Include(c => c.ProgrammingLanguage!),
-            //     index: request.PageRequest!.Page,
-            //     size: request.PageRequest.PageSize);
-
             var result = await _userRepository.GetListAsync(
-                include: m => m.Include(c => c.UserOperationClaims),
+                include: m => m.Include(c => c.UserOperationClaims).ThenInclude(c => c.OperationClaim),
                 index: request.Page,
                 size: request.PageSize);
 

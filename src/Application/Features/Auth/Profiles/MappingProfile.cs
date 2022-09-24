@@ -18,8 +18,8 @@ public class MappingProfile : Profile
         CreateMap<AccessToken, LoginedUserDto>().ReverseMap();
 
         CreateMap<User, UserListDto>()
-            .ForMember(c => c.UserOperationClaims, opt => opt.MapFrom(c => c.UserOperationClaims)).ReverseMap();
+            .ForMember(c => c.OperationClaims,
+                opt => opt.MapFrom(c => c.UserOperationClaims.Select(x => x.OperationClaim))).ReverseMap();
         CreateMap<IPaginate<User>, UserListModel>().ReverseMap();
-
     }
 }
