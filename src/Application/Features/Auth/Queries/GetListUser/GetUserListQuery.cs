@@ -1,4 +1,5 @@
-﻿using Application.Features.Auth.Models;
+﻿using Application.Common.Behaviours.Authorization;
+using Application.Features.Auth.Models;
 using Application.Repositories.EntityFramework;
 using AutoMapper;
 using MediatR;
@@ -6,12 +7,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Application.Features.Auth.Queries.GetListUser;
 
-public class GetUserListQuery : IRequest<UserListModel>
+public class GetUserListQuery : IRequest<UserListModel>,ISecuredRequest
 {
-    //TODO: Refactor
     public int Page { get; set; }
     public int PageSize { get; set; }
-    
+
+    public string[] Roles => new string[] {"admin"};
+
     public class GetUsersListQuertHandler : IRequestHandler<GetUserListQuery, UserListModel>
     {
         private readonly IUserRepository _userRepository;

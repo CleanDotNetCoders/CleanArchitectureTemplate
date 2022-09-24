@@ -36,6 +36,13 @@ namespace Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("OperationClaims", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "0460d8c9-75a6-4d68-abc3-f249523f3e93",
+                            Name = "admin"
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.RefreshToken", b =>
@@ -124,6 +131,19 @@ namespace Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "ce1bf1ec-4854-49b0-a7cc-6c8a902e0aa9",
+                            AuthenticatorType = 0,
+                            Email = "admin@admin.com",
+                            FirstName = "admin",
+                            LastName = "admin",
+                            PasswordHash = new byte[] { 93, 103, 255, 15, 89, 156, 127, 29, 168, 110, 239, 121, 50, 61, 67, 21, 193, 73, 177, 173, 70, 118, 202, 59, 184, 149, 65, 165, 231, 152, 140, 16, 163, 66, 132, 104, 186, 79, 46, 232, 87, 86, 96, 112, 123, 87, 180, 99, 22, 53, 132, 184, 192, 50, 170, 85, 226, 144, 37, 133, 102, 171, 108, 171 },
+                            PasswordSalt = new byte[] { 169, 214, 148, 147, 130, 16, 86, 187, 91, 47, 111, 207, 120, 118, 78, 74, 157, 109, 141, 72, 205, 174, 20, 134, 244, 80, 169, 221, 152, 76, 134, 135, 247, 40, 155, 226, 45, 64, 94, 128, 164, 223, 51, 158, 154, 130, 158, 240, 28, 69, 35, 123, 11, 189, 70, 63, 252, 241, 147, 189, 252, 244, 59, 228, 172, 57, 176, 75, 125, 98, 150, 32, 169, 106, 77, 89, 17, 150, 96, 252, 153, 242, 159, 241, 195, 78, 69, 107, 45, 154, 136, 34, 238, 233, 219, 38, 128, 8, 244, 36, 142, 34, 224, 90, 127, 203, 96, 218, 207, 80, 88, 129, 152, 54, 125, 109, 220, 160, 149, 84, 68, 218, 196, 37, 161, 249, 114, 237 },
+                            Status = true
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.UserOperationClaim", b =>
@@ -149,6 +169,14 @@ namespace Persistence.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("UserOperationClaims", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "5565e2ed-b81d-42b6-a26c-0d08f383ce5f",
+                            OperationClaimId = "0460d8c9-75a6-4d68-abc3-f249523f3e93",
+                            UserId = "ce1bf1ec-4854-49b0-a7cc-6c8a902e0aa9"
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.RefreshToken", b =>

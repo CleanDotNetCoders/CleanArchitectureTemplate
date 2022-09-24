@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using Application.Common.Utilities;
+using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
@@ -52,5 +53,16 @@ public class BaseDbContext : DbContext
             p.HasOne(p => p.OperationClaim);
             p.HasOne(p => p.User);
         });
+
+        HashingHelper.CreatePasswordHash("SdQnv96ZA4$P78G1Ab3ONa$HC!tDVi", out var passwordHash, out var passwordSalt);
+
+        User[] userEntitySeeds = { new("ce1bf1ec-4854-49b0-a7cc-6c8a902e0aa9", "admin", "admin", "admin@admin.com", passwordSalt, passwordHash, true, Domain.Enums.AuthenticatorType.None) };
+        modelBuilder.Entity<User>().HasData(userEntitySeeds);
+
+        OperationClaim[] operationClaimEntitySeeds = { new("0460d8c9-75a6-4d68-abc3-f249523f3e93", "admin") };
+        modelBuilder.Entity<OperationClaim>().HasData(operationClaimEntitySeeds);
+
+        UserOperationClaim[] userOperationClaimEntitySeeds = { new("5565e2ed-b81d-42b6-a26c-0d08f383ce5f", "ce1bf1ec-4854-49b0-a7cc-6c8a902e0aa9", "0460d8c9-75a6-4d68-abc3-f249523f3e93") };
+        modelBuilder.Entity<UserOperationClaim>().HasData(userOperationClaimEntitySeeds);
     }
 }
