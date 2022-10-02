@@ -13,9 +13,10 @@ public class MappingProfile : Profile
     public MappingProfile()
     {
         CreateMap<CreateUserCommand, CreatedUserDto>().ReverseMap();
+        CreateMap<RefreshToken, CreatedUserDto>().ReverseMap();
         CreateMap<LoginUserCommand, LoginedUserDto>().ReverseMap();
-
-        CreateMap<AccessToken, LoginedUserDto>().ReverseMap();
+        
+        CreateMap<RefreshToken, LoginedUserDto>().ReverseMap();
 
         CreateMap<User, UserListDto>()
             .ForMember(c => c.OperationClaims,

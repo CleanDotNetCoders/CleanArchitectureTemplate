@@ -12,7 +12,7 @@ using Persistence.Repositories.EntityFramework.Contexts;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(BaseDbContext))]
-    [Migration("20220924195129_mg1")]
+    [Migration("20221002141118_mg1")]
     partial class mg1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -52,31 +52,24 @@ namespace Persistence.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CreatedByIp")
+                    b.Property<string>("Client")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("Expires")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("ReasonRevoked")
+                    b.Property<string>("IpAddress")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ReplacedByToken")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("Revoked")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("RevokedByIp")
+                    b.Property<string>("RefreshTokenValue")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Token")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("TokenExpiration")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("UserId")
                         .IsRequired()
@@ -142,8 +135,8 @@ namespace Persistence.Migrations
                             Email = "admin@admin.com",
                             FirstName = "admin",
                             LastName = "admin",
-                            PasswordHash = new byte[] { 93, 103, 255, 15, 89, 156, 127, 29, 168, 110, 239, 121, 50, 61, 67, 21, 193, 73, 177, 173, 70, 118, 202, 59, 184, 149, 65, 165, 231, 152, 140, 16, 163, 66, 132, 104, 186, 79, 46, 232, 87, 86, 96, 112, 123, 87, 180, 99, 22, 53, 132, 184, 192, 50, 170, 85, 226, 144, 37, 133, 102, 171, 108, 171 },
-                            PasswordSalt = new byte[] { 169, 214, 148, 147, 130, 16, 86, 187, 91, 47, 111, 207, 120, 118, 78, 74, 157, 109, 141, 72, 205, 174, 20, 134, 244, 80, 169, 221, 152, 76, 134, 135, 247, 40, 155, 226, 45, 64, 94, 128, 164, 223, 51, 158, 154, 130, 158, 240, 28, 69, 35, 123, 11, 189, 70, 63, 252, 241, 147, 189, 252, 244, 59, 228, 172, 57, 176, 75, 125, 98, 150, 32, 169, 106, 77, 89, 17, 150, 96, 252, 153, 242, 159, 241, 195, 78, 69, 107, 45, 154, 136, 34, 238, 233, 219, 38, 128, 8, 244, 36, 142, 34, 224, 90, 127, 203, 96, 218, 207, 80, 88, 129, 152, 54, 125, 109, 220, 160, 149, 84, 68, 218, 196, 37, 161, 249, 114, 237 },
+                            PasswordHash = new byte[] { 99, 71, 246, 25, 139, 133, 16, 183, 176, 244, 106, 56, 153, 213, 218, 204, 6, 142, 205, 7, 21, 32, 246, 105, 148, 96, 252, 211, 217, 230, 38, 83, 29, 182, 31, 114, 99, 61, 254, 134, 88, 19, 117, 225, 78, 114, 160, 200, 122, 12, 150, 150, 42, 73, 4, 6, 233, 73, 92, 254, 223, 28, 137, 27 },
+                            PasswordSalt = new byte[] { 192, 63, 48, 3, 244, 92, 238, 173, 206, 5, 229, 40, 2, 87, 203, 24, 55, 105, 120, 60, 167, 117, 201, 190, 173, 114, 244, 115, 2, 74, 239, 197, 176, 145, 55, 234, 185, 179, 145, 179, 37, 97, 106, 215, 14, 65, 78, 101, 15, 32, 54, 36, 131, 46, 144, 190, 181, 209, 188, 214, 26, 162, 32, 50, 234, 158, 67, 83, 69, 172, 100, 2, 189, 26, 99, 57, 28, 146, 170, 127, 43, 216, 137, 4, 86, 145, 43, 40, 122, 238, 183, 54, 202, 43, 50, 129, 56, 254, 37, 181, 17, 174, 148, 67, 208, 60, 241, 250, 240, 223, 209, 78, 238, 226, 184, 75, 18, 49, 163, 167, 57, 250, 237, 43, 206, 186, 169, 231 },
                             Status = true
                         });
                 });

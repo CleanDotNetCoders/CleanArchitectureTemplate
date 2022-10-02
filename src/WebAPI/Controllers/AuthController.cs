@@ -1,4 +1,5 @@
-﻿using Application.Features.Auth.Commands.CreateUserCommand;
+﻿using Application.Features.Auth.Commands.CreateTokenWithRefreshToken;
+using Application.Features.Auth.Commands.CreateUserCommand;
 using Application.Features.Auth.Commands.LoginUserCommand;
 using Application.Features.Auth.Queries.GetListUser;
 using MediatR;
@@ -26,6 +27,13 @@ namespace WebAPI.Controllers
 
         [HttpPost("Login")]
         public async Task<IActionResult> Login(LoginUserCommand command)
+        {
+            var data = await _mediator.Send(command);
+            return Ok(data);
+        }
+
+        [HttpPost("RefreshToken")]
+        public async Task<IActionResult> RefreshToken(CreateTokenWithRefreshTokenCommand command)
         {
             var data = await _mediator.Send(command);
             return Ok(data);

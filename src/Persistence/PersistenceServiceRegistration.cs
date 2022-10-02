@@ -26,6 +26,7 @@ public static class PersistenceServiceRegistration
                 configuration.GetConnectionString("templatesql")));
 
         services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
 
         return services;
     }

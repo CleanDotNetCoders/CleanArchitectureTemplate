@@ -39,19 +39,50 @@ public class JwtHelper : ITokenHelper
         };
     }
 
+    private string CreateRefreshToken()
+    {
+        var number = new byte[32];
+        using (var random = RandomNumberGenerator.Create())
+        {
+            random.GetBytes(number);
+            return Convert.ToBase64String(number);
+        }
+    }
+
     public RefreshToken CreateRefreshToken(User user, string ipAddress)
     {
         RefreshToken refreshToken = new()
         {
+            Id = Guid.NewGuid().ToString(),
+            Client = Guid.NewGuid().ToString(),
+            IpAddress = ipAddress,
+            RefreshTokenValue = CreateRefreshToken(),
             UserId = user.Id,
-            Token = Convert.ToBase64String(RandomNumberGenerator.GetBytes(64)),
-            Expires = DateTime.UtcNow.AddDays(7),
-            Created = DateTime.UtcNow,
-            CreatedByIp = ipAddress
+            Token = CreateToken(user, user.UserOperationClaims.Select(p => p.OperationClaim).ToList()).Token,
+            TokenExpiration = DateTime.Now.AddMinutes(_tokenOptions.AccessTokenExpiration)
         };
 
         return refreshToken;
     }
+
+    public RefreshToken CreateRefreshTokenWithStillClient(User user, string ipAddress,string clientId)
+    {
+        RefreshToken refreshToken = new()
+        {
+            Id  = Guid.NewGuid().ToString(),
+            Client = clientId,
+            IpAddress = ipAddress,
+            RefreshTokenValue = CreateRefreshToken(),
+            UserId = user.Id,
+            Token = CreateToken(user, user.UserOperationClaims.Select(p => p.OperationClaim).ToList()).Token,
+            TokenExpiration = DateTime.Now.AddMinutes(_tokenOptions.AccessTokenExpiration)
+
+        };
+
+        return refreshToken;
+    }
+
+
 
     public JwtSecurityToken CreateJwtSecurityToken(TokenOptions tokenOptions, User user,
                                                    SigningCredentials signingCredentials,
